@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1040965131589",
+    "project_id": "web-app-49634",
+    "storage_bucket": "web-app-49634.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040965131589:android:9a818dc2849a312eea322c",
+        "android_client_info": {
+          "package_name": "com.example.mi_card"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040965131589-9vmpcl25m6qh4lc42v3n9ui0pgrujll6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnN78aH8daNPDdTtoBnUBDGO_nPOmAD4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040965131589-9vmpcl25m6qh4lc42v3n9ui0pgrujll6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
