@@ -55,3 +55,35 @@ const kChatStyle = TextStyle(
   color: Colors.white,
   fontSize: 14.0,
 );
+
+const kTodoTitle = TextStyle(
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.w700,
+  fontSize: 40.0,
+  color: Colors.white,
+);
+
+const kTodoSubText = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 20.0,
+  color: Colors.white,
+);
+
+const kTodoTaskText = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 20.0,
+  color: Colors.black,
+);
+
+const kTodoBottomText = TextStyle(
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.w700,
+  fontSize: 20.0,
+  color: Colors.black,
+);
+
+const kTodoBottomButtonText = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 20.0,
+  color: Colors.white,
+);
