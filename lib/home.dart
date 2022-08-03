@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mi_card/bitcoin/intro.dart';
 import 'package:mi_card/const/const.dart';
+import 'package:mi_card/flash_chat/main.dart';
 import 'package:mi_card/screens_bmi_calculator/bmi_calculator.dart';
 import 'package:mi_card/screensclima/city_screen.dart';
 import 'package:mi_card/screensclima/loading_screen.dart';
+import 'package:mi_card/todo/home.dart';
 import 'music.dart';
-
 
 void main() {
   runApp(
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
         '/bmi': (context) => const BMIApp(),
         '/clima' : (context) => LoadingScreen(),
         '/bitcoin' : (context) => const IntroScreen(),
+        '/chat' : (context) => FlashChat(),
+        '/todo' : (context) => const TaskApp(),
       },
     );
   }
@@ -42,33 +45,30 @@ class MainScreenBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 180.0,
-            width: MediaQuery. of(context). size. width,
-            child: Row( // top row for title and title image.
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text("Practice", style: kExtraBoldTitleStyle,),
-                      Text("Apps", style: kExtraBoldTitleStyle,),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Image.asset('assets/images/coding.png',
-                  fit: BoxFit.fill,),
-                ),
-              ]
-            ),
-          ),
           Expanded(
             child: ListView(
                 children: [
+                  Row( // top row for title and title image.
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text("Practice", style: kExtraBoldTitleStyle,),
+                              Text("Apps", style: kExtraBoldTitleStyle,),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Image.asset('assets/images/coding.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ]
+                  ),
                   TileElementApplicationList(route: '/bitcoin', appContext: 'Bitcoin - Convert your crypto in your local currency', thumbnailAsset: 'assets/images/bitcoin_bg.png'),
                   const SizedBox(
                       height: 20.0,
@@ -82,6 +82,17 @@ class MainScreenBody extends StatelessWidget {
                     height: 20.0,
                   ),
                   TileElementApplicationList(route: '/bmi', appContext: 'BMI - Check your body status by calculating BMI instantly.', thumbnailAsset: 'assets/images/bmi_bg.png'),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TileElementApplicationList(route: '/chat', appContext: 'Chat - Personal Private Playful, 3 P’s to explain this product.', thumbnailAsset: 'assets/images/chat_bg.png'),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TileElementApplicationList(route: '/todo', appContext: 'TODO - Never miss a single task every day with todo app.', thumbnailAsset: 'assets/images/todo_bg.png'),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
                 ],
             ),
           ),
@@ -113,6 +124,13 @@ class TileElementApplicationList extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: kNotWhite,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 4.0,
+                    offset: Offset(0, 4),
+                  ),
+                ],
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Column(

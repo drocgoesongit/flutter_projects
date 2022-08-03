@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:mi_card/flash_chat/constants.dart';
+import 'package:mi_card/todo/task.dart';
 
-class TaskScreen extends StatelessWidget {
-  const TaskScreen({Key? key}) : super(key: key);
+
+class TaskScreen extends StatefulWidget {
+
+  @override
+  State<TaskScreen> createState() => _TaskScreenState();
+}
+
+class _TaskScreenState extends State<TaskScreen> {
+  List<Task> task = [
+    Task(task: "Go for buying milk"),
+    Task(task: "Disappear 😂")
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showModalBottomSheet(context: context, builder: (context) => BottomSheetTaskAdding(), isScrollControlled: true);
+          showModalBottomSheet(context: context, builder: (context) => BottomSheetTaskAdding(taskList: task,), isScrollControlled: true);
         },
         child: const Icon(Icons.add),
       ),
@@ -50,13 +61,7 @@ class TaskScreen extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: ListView(
-                  children: [
-                    TodoItem(task: "Do homework", isDone: true),
-                    TodoItem(task: "Clean house", isDone: false),
-                    TodoItem(task: "Watch today's match", isDone: false),
-                  ],
-                ),
+                child: TaskList(taskList: task),
               ),
             )
           )
@@ -66,18 +71,38 @@ class TaskScreen extends StatelessWidget {
   }
 }
 
+class TaskList extends StatelessWidget {
+  TaskList({required this.taskList});
+
+  List<Task> taskList;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: taskList.length,
+        itemBuilder: (context, index) {
+      return TodoItem(
+        task: taskList[index].task ,
+        isDone: taskList[index].isDone,
+      );
+    }
+    );
+  }
+}
+
+// single todo item.
 class TodoItem extends StatefulWidget {
+  
   TodoItem({required this.task, required this.isDone});
 
   final String task;
-  bool isDone;
+  bool isDone = false;
 
   @override
   State<TodoItem> createState() => _TodoItemState();
 }
 
 class _TodoItemState extends State<TodoItem> {
-
 
   @override
   Widget build(BuildContext context) {
@@ -112,8 +137,17 @@ class _TodoItemState extends State<TodoItem> {
   }
 }
 
-class BottomSheetTaskAdding extends StatelessWidget {
-  const BottomSheetTaskAdding({Key? key}) : super(key: key);
+// bottom sheet to add new task.
+class BottomSheetTaskAdding extends StatefulWidget {
+  BottomSheetTaskAdding({required this.taskList});
+  List<Task> taskList;
+
+  @override
+  State<BottomSheetTaskAdding> createState() => _BottomSheetTaskAddingState();
+}
+
+class _BottomSheetTaskAddingState extends State<BottomSheetTaskAdding> {
+  late String value;
 
   @override
   Widget build(BuildContext context) {
@@ -142,8 +176,11 @@ class BottomSheetTaskAdding extends StatelessWidget {
                   padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom,
                   ),
-                  child: const TextField(
-                    style: TextStyle(
+                  child: TextField(
+                    onChanged: (input) {
+                      value = input;
+                    },
+                    style: const TextStyle(
                       fontFamily: "Poppins",
                       fontSize: 18.0,
                       color: Colors.black,
@@ -157,7 +194,14 @@ class BottomSheetTaskAdding extends StatelessWidget {
                 MaterialButton(
                   height: 60.0,
                   onPressed: () {
-
+                    setState((){
+                      if(value != null){
+                        widget.taskList.add(
+                          Task(task: value),
+                        );
+                      }
+                      Navigator.of(context).pop();
+                    });
                   },
                   color: Colors.lightBlueAccent,
                   child: const Text(
